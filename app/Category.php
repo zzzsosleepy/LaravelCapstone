@@ -14,7 +14,8 @@ class Category extends Model
     const UPDATED_AT = 'updated_at';
     protected $dates = ['deleted_at'];
 
-    public function items() {
-        return $this->hasMany('\App\Item','category_id', 'id')->orderBy('name','ASC');
+    public function items()
+    {
+        return $this->hasMany('\App\Item', 'category_id', 'id')->orderBy('title', 'ASC');
     }
 }

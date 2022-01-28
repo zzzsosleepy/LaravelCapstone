@@ -38,8 +38,15 @@ Laravel Project
 							<th>{{ $category->id }}</th>
 							<td>{{ $category->name }}</td>
 							<td style='width:100px;'>{{ date('M j, Y', strtotime($category->created_at)) }}</td>
-							<td style='width:100px;'>{{ date('M j, Y', strtotime($category->updated_at)) }}</td>
-							<td style='width:150px;'><div style='float:left; margin-right:5px;'><a href="{{ route('categories.edit', $category->id) }}" class="btn btn-success btn-sm">Edit</a></div><div style='float:left;'></div>
+							<td>{{ date('M j, Y', strtotime($category->updated_at)) }}</td>
+							<td style="width: 175px;"><div style='float:left; margin-right:5px;'><a href="{{ route('categories.edit', $category->id) }}" class="btn btn-success btn-sm">Edit</a></div>
+								<div style='float:left;'>
+									@if($category::find($category->id)->items->isEmpty())
+										{!! Form::open(['route' => ['categories.destroy', $category->id], 'method'=>'DELETE']) !!}
+										{{ Form::submit('Delete', ['class'=>'btn btn-sm btn-danger btn-block', 'style'=>'', 'onclick'=>'return confirm("Are you sure?")']) }}
+										{!! Form::close() !!}
+									@endif
+								</div>
 							</td>
 						</tr>
 					@endforeach

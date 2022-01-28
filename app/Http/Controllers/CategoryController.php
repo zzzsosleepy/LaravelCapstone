@@ -15,8 +15,8 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        $categories = Category::orderBy('name','ASC')->paginate(10);
-        return view('categories.index')->with('categories',$categories);
+        $categories = Category::orderBy('name', 'ASC')->paginate(10);
+        return view('categories.index')->with('categories', $categories);
     }
 
     /**
@@ -39,14 +39,14 @@ class CategoryController extends Controller
     {
         //validate the data
         // if fails, defaults to create() passing errors
-        $this->validate($request, ['name'=>'required|max:100|unique:categories,name']); 
+        $this->validate($request, ['name' => 'required|max:100|unique:categories,name']);
 
         //send to DB (use ELOQUENT)
         $category = new Category;
         $category->name = $request->name;
         $category->save(); //saves to DB
 
-        Session::flash('success','The category has been added');
+        Session::flash('success', 'The category has been added');
 
         //redirect
         return redirect()->route('categories.index');
@@ -72,7 +72,7 @@ class CategoryController extends Controller
     public function edit($id)
     {
         $category = Category::find($id);
-        return view('categories.edit')->with('category',$category);
+        return view('categories.edit')->with('category', $category);
     }
 
     /**
@@ -87,18 +87,17 @@ class CategoryController extends Controller
         //validate the data
         // if fails, defaults to create() passing errors
         $category = Category::find($id);
-        $this->validate($request, ['name'=>"required|max:100|unique:categories,name,$id"]);             
+        $this->validate($request, ['name' => "required|max:100|unique:categories,name,$id"]);
 
         //send to DB (use ELOQUENT)
         $category->name = $request->name;
 
         $category->save(); //saves to DB
 
-        Session::flash('success','The category has been updated');
+        Session::flash('success', 'The category has been updated');
 
         //redirect
         return redirect()->route('categories.index');
-        
     }
 
     /**
@@ -109,6 +108,14 @@ class CategoryController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $category = Category::find($id);
+        $result = Category::find($id)->items;
+        if ($result->isEmpty()) {
+            $category->delete();
+            Session::flash('success', 'The category has been deleted');
+        }
+
+
+        return redirect()->route('categories.index');
     }
 }
