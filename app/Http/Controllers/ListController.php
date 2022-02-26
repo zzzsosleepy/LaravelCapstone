@@ -10,7 +10,7 @@ use Storage;
 use Session;
 use Illuminate\Support\Facades\Auth;
 
-class ItemController extends Controller
+class ListController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -21,7 +21,8 @@ class ItemController extends Controller
     {
         if (Auth::check()) {
             $items = Item::orderBy('title', 'ASC')->paginate(10);
-            return view('items.index')->with('items', $items);
+            $categories = Category::all()->sortBy('name');
+            return view('products.index')->with('items', $items)->with('categories', $categories);
         } else {
             return view('auth.login');
         }

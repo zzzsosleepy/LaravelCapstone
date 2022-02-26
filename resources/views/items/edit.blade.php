@@ -39,8 +39,17 @@ Laravel Project
 				</select>
 
 			    {{ Form::label('description', 'Description:', ['style'=>'margin-top:20px']) }}
-			    {{ Form::textarea('description', null, ['class'=>'form-control', 
-				                                 'data-parsley-required'=>'']) }}
+				<textarea class="description" name="description"> {{ $item->description }}</textarea>
+				<script src="{{ asset('node_modules/tinymce/tinymce.js') }}"></script>
+				<script>
+					tinymce.init({
+						selector:'textarea.description',
+						width: 750,
+						height: 300
+					});
+				</script>
+			    {{-- {{ Form::textarea('description', null, ['class'=>'form-control', 
+				                                 'data-parsley-required'=>'']) }} --}}
 
 				{{ Form::label('price', 'Price:', ['style'=>'margin-top:20px']) }}
 			    {{ Form::text('price', null, ['class'=>'form-control', 'style'=>'', 

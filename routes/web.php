@@ -15,6 +15,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::resource('items', '\App\Http\Controllers\ItemController');
 Route::resource('categories', '\App\Http\Controllers\CategoryController');
+Route::resource('list', '\App\Http\Controllers\ListController');
 
 Route::get('/', function () {
     return view('welcome');
