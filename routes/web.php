@@ -15,12 +15,15 @@ use Illuminate\Support\Facades\Route;
 
 Route::resource('items', '\App\Http\Controllers\ItemController');
 Route::resource('categories', '\App\Http\Controllers\CategoryController');
-Route::resource('list', '\App\Http\Controllers\ListController');
+Route::resource('/', '\App\Http\Controllers\ListController');
+Route::resource('home', '\App\Http\Controllers\HomeController');
+Route::resource('products', '\App\Http\Controllers\ListController');
 
-Route::get('/', function () {
-    return view('welcome');
-});
+
+// Route::get('/', function () {
+//     return view('products.index');
+// });
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+// Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

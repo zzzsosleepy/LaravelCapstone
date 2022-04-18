@@ -78,10 +78,20 @@ class ItemController extends Controller
                 $image = $request->file('picture');
 
                 $filename = time() . '.' . $image->getClientOriginalExtension();
+                $filename_tn = "tn_" . time() . '.' . $image->getClientOriginalExtension();
+                $filename_lrg = "lrg_" . time() . '.' . $image->getClientOriginalExtension();
                 $location = 'images/items/' . $filename;
+                $location_tn = 'images/items/' . $filename_tn;
+                $location_lrg = 'images/items/' . $filename_lrg;
 
                 $image = Image::make($image);
-                Storage::disk('public')->put($location, (string) $image->encode());
+                // keep ratio height and width
+                $image_lrg = $image->resize(550, 550);
+                $image_tn = $image->resize(150, 150);
+                Storage::disk('public')->put($location,  (string) $image->encode());
+                Storage::disk('public')->put($location_tn,  (string) $image_tn->encode());
+                Storage::disk('public')->put($location_lrg, (string) $image_lrg->encode());
+
                 $item->picture = $filename;
             }
 
@@ -104,7 +114,8 @@ class ItemController extends Controller
      */
     public function show($id)
     {
-        //
+        $item = Item::find($id);
+        return view('items.show')->with('item', $item);
     }
 
     /**
@@ -172,7 +183,6 @@ class ItemController extends Controller
 
                 $item->picture = $filename;
             }
-
             $item->save(); //saves to DB
 
             Session::flash('success', 'The item has been updated');

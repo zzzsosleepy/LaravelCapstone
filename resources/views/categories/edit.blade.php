@@ -5,7 +5,7 @@ Edit Category
 @endsection
 
 @section('pagename')
-Laravel Project
+Laravel Capstone
 @endsection
 
 @section('scripts')

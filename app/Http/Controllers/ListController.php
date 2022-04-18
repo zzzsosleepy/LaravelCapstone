@@ -19,13 +19,9 @@ class ListController extends Controller
      */
     public function index()
     {
-        if (Auth::check()) {
-            $items = Item::orderBy('title', 'ASC')->paginate(10);
-            $categories = Category::all()->sortBy('name');
-            return view('products.index')->with('items', $items)->with('categories', $categories);
-        } else {
-            return view('auth.login');
-        }
+        $items = Item::orderBy('title', 'ASC')->paginate(10);
+        $categories = Category::all()->sortBy('name');
+        return view('products.index')->with('items', $items)->with('categories', $categories);
     }
 
     /**
@@ -105,7 +101,9 @@ class ListController extends Controller
      */
     public function show($id)
     {
-        //
+        $items = Item::where('category_id', $id)->orderBy('title', 'ASC')->paginate(10);
+        $categories = Category::all()->sortBy('name');
+        return view('products.index')->with('items', $items)->with('categories', $categories);
     }
 
     /**

@@ -5,7 +5,7 @@ Item List
 @endsection
 
 @section('pagename')
-Laravel Project
+Laravel Capstone
 @endsection
 
 @section('content')
