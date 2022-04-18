@@ -70,6 +70,33 @@ Laravel Capstone
         <div style='text-align: right;'>
             <h1>Subtotal: <strong>${{ $subTotal }}</strong></h1>
         </div>
+        {{-- Customer information fields --}}
+        <div>
+            <h3>Customer Information</h3>
+            {{-- When they click the submit order button at the bottom of
+            the form, they will call the check_order route --}}
+            <form action="{{ route('order.store') }}" method="POST" enctype="multipart/form-data">
+                @csrf
+                <div class="form-group">
+                    <label for="first_name">First Name</label>
+                    <input type="text" name="first_name" class="form-control" id="first_name" placeholder="First Name">
+                </div>
+                <div class="form-group">
+                    <label for="last_name">Last Name</label>
+                    <input type="text" name="last_name" class="form-control" id="last_name" placeholder="Last Name">
+                </div>
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" name="email" class="form-control" id="email" placeholder="Email">
+                </div>
+                <div class="form-group">
+                    <label for="phone">Phone</label>
+                    <input type="text" name="phone" class="form-control" id="phone" placeholder="Phone">
+                </div>
+                {{-- Submit order button --}}
+                <button type="submit" class="btn btn-primary">Submit Order</button>
+            </form>
+        </div>
     </div>
 </div>
 

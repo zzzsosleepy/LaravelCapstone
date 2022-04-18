@@ -38,6 +38,10 @@
             <li class="{{ (Request::is('/')) ? "active" : "" }}"><a href="/">Home</a></li>
             <li class="{{ Request::is('categories/*') || Request::is('categories') ? "active" : "" }}"><a href="/categories">Categories</a></li>
             <li class="{{ Request::is('items/*') || Request::is('items') ? "active" : "" }}"><a href="/items">Items</a></li>
+            {{-- If admin, show view orders link --}}
+            @if(Auth::check())
+            <li class="{{ Request::is('order/*') || Request::is('order') ? "active" : "" }}"><a href="/order">View Orders</a></li>
+            @endif
           </ul>
           <ul class="nav navbar-nav navbar-right">
           </ul>

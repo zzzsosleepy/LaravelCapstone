@@ -20,6 +20,8 @@ Route::resource('/', '\App\Http\Controllers\ListController');
 Route::resource('home', '\App\Http\Controllers\HomeController');
 Route::resource('products', '\App\Http\Controllers\ListController');
 Route::resource('cart', '\App\Http\Controllers\CartController');
+Route::resource('order', '\App\Http\Controllers\OrderController');
+Route::resource('thankyou', '\App\Http\Controllers\ThankyouController');
 
 
 // Route::get('/', function () {
