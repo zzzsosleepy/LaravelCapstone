@@ -23,6 +23,7 @@ Laravel Capstone
                 <p style='font-size: 22px;'>Item Description: </p>
                 <p style='font-size: 18px;'>{{ $item->description }}</p>
                 <p style='font-size: 24px; font-weight: bold;'>${{ $item->price }}</p>
+                <input type="button" class="btn btn-success" value="Add to cart"/>
                 <p>In stock: {{ $item->quantity }}</p>
                 <p>SKU: {{ $item->sku }}</p>
             </div>

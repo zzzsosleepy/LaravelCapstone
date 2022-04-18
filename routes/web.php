@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -18,6 +19,7 @@ Route::resource('categories', '\App\Http\Controllers\CategoryController');
 Route::resource('/', '\App\Http\Controllers\ListController');
 Route::resource('home', '\App\Http\Controllers\HomeController');
 Route::resource('products', '\App\Http\Controllers\ListController');
+Route::resource('cart', '\App\Http\Controllers\CartController');
 
 
 // Route::get('/', function () {
@@ -25,5 +27,3 @@ Route::resource('products', '\App\Http\Controllers\ListController');
 // });
 
 Auth::routes();
-
-// Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

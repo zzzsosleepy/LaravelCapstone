@@ -7,8 +7,8 @@ use App\Category;
 use App\Item;
 use Image;
 use Storage;
-use Session;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
 
 class ItemController extends Controller
 {
@@ -114,6 +114,8 @@ class ItemController extends Controller
      */
     public function show($id)
     {
+        $ip = request()->ip();
+        Session::put('ip', $ip);
         $item = Item::find($id);
         return view('items.show')->with('item', $item);
     }

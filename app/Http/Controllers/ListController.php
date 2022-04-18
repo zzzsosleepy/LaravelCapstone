@@ -7,8 +7,9 @@ use App\Category;
 use App\Item;
 use Image;
 use Storage;
-use Session;
+// use Session;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
 
 class ListController extends Controller
 {
@@ -19,6 +20,8 @@ class ListController extends Controller
      */
     public function index()
     {
+        $ip = request()->ip();
+        Session::put('ip', $ip);
         $items = Item::orderBy('title', 'ASC')->paginate(10);
         $categories = Category::all()->sortBy('name');
         return view('products.index')->with('items', $items)->with('categories', $categories);
@@ -101,6 +104,8 @@ class ListController extends Controller
      */
     public function show($id)
     {
+        $ip = request()->ip();
+        Session::put('ip', $ip);
         $items = Item::where('category_id', $id)->orderBy('title', 'ASC')->paginate(10);
         $categories = Category::all()->sortBy('name');
         return view('products.index')->with('items', $items)->with('categories', $categories);

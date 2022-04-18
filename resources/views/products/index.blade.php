@@ -8,10 +8,9 @@ Laravel Capstone - Products
 Laravel Capstone
 @endsection
 
-@section('content')
-	
+@section('content')	
 	<div class="row">
-		<div class="col-md-8 col-md-offset-2 text-center">
+		<div class="col-md-8 text-center">
 			<h1>Product List</h1>
 		</div>
 		<div class="col-md-2">
@@ -19,15 +18,15 @@ Laravel Capstone
 		</div>
 	</div>
 
-	<div class="row center-content">
-		<div class="col-md-2" style='background-color: rgba(0,0,0,0.2); height: 100%; border-radius: 10px; width: 60%; margin-inline: auto;'>
+	<div class="row">
+		<div class="col-md-2" style='background-color: rgba(0,0,0,0.2); height: 100%; border-radius: 10px; width: 20%; margin-inline: auto;'>
 			<table class="table text-center" >
 				<thead>
 					<th class="text-center" style='font-size: 24px; text-transform: uppercase;'>Category</th>
 				</thead>
 				<tbody>
 					{{-- When a category link is followed, only
-products in that category are to be displayed --}}
+					products in that category are to be displayed --}}
 					@foreach ($categories as $category)
 						<tr>
 							<td>
@@ -35,16 +34,8 @@ products in that category are to be displayed --}}
 							</td>
 						</tr>
 					@endforeach
-					{{-- @foreach ($categories as $category)
-						<tr>
-							<td><a href="#" style='text-transform: uppercase;'><strong>{{ $category->name }}</a></td>
-						</tr>
-					@endforeach --}}
 				</tbody>
 			</table>
-			{{-- <div class="text-center">
-				{!! $items->links(); !!}
-			</div> --}}
 		</div>
 
 		<div class="col-md-7">
@@ -62,14 +53,19 @@ products in that category are to be displayed --}}
 						@endif
 							<td class='center-content'>
 								{{-- When you click on either the thumbnail or title, you will be brought to the details
-page where you will display a larger picture plus all other fields that are required to be stored
-(title, product_id, description, price, quantity, sku). --}}
+								page where you will display a larger picture plus all other fields that are required to be stored
+								(title, product_id, description, price, quantity, sku). --}}
 								<a href="{{ route('items.show', $item->id) }}" style='text-align: center; font-size: 18px;'>{{ $item->title }}</a>
 								@if ($item->picture != "")
 									<a href="{{ route('items.show', $item->id) }}"><img src="{{ Storage::url('images/items/tn_'.$item->picture) }}" style='width:150px; height: 150px; object-fit:cover; border: 2px solid rgba(0,0,0,1); border-radius: 10px; box-shadow: 0px 5px 10px rgba(0,0,0,0.17);' ></a>
 								@endif
 								<div style='font-size: 32px;'><strong>${{ $item->price }}</strong></div>
-								<input type="button" class="btn btn-success" value="Buy Now!"/>
+								{{-- Add item to the cart when clicked --}}
+								<form action="{{ route('cart.store') }}" method="POST" enctype="multipart/form-data">
+									@csrf
+									<input type="hidden" value="{{ $item->id }}" name="id">
+									<button class="btn btn-success">Add to cart</button>
+								</form>
 							</td>
 						@php
 							$itemCount++;
@@ -83,9 +79,6 @@ page where you will display a larger picture plus all other fields that are requ
 					@endforeach
 				</tbody>
 			</table>
-			{{-- <div class="text-center">
-				{!! $items->links(); !!}
-			</div> --}}
 		</div>
 	</div>
 

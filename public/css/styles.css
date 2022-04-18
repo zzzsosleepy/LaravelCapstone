@@ -59,6 +59,12 @@ ul.navbar-nav li.active {
 	margin-bottom: 25px;
 }
 
+.shoppingCart {
+	display: flex;
+	justify-content: flex-end;
+	align-items: center;
+}
+
 .container { 
 	margin-bottom:100px; 
 }
